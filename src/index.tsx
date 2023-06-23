@@ -4,6 +4,8 @@ import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/scss/bootstrap.scss'
+import './common/main.scss'
+import './custom-var.scss'
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
