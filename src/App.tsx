@@ -12,7 +12,7 @@ import DetailsComponent from './modules/details-component';
 
 import ErrorComponent from './common/error-component';
 import AuthProvider from './common/auth'
-import RequireAuth from './common/auth'
+import RequireAuth from './common/require-auth-component'
 import {
   Routes,
   Route,  
