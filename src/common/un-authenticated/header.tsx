@@ -1,6 +1,6 @@
 import React from 'react';
-import logo from '../logo.svg';
-import LoginDropdown from './login-dropdown';
+import logo from '../../logo.svg';
+import LoginDropdown from '../login-dropdown';
 function Header(){
     return (
         <div className="header row">

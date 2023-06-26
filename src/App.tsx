@@ -5,37 +5,38 @@ import Header from './common/header';
 import Footer from './common/footer';
 import Panel from './common/panel';
 import Container from './common/container';
+import LayoutComponent from './common/un-authenticated/layout-component';
+import HomeComponent from './common/home-component';
+import LoginComponent from './modules/login/login';
+import DetailsComponent from './modules/details-component';
+
+import ErrorComponent from './common/error-component';
+import AuthProvider from './common/auth'
+import RequireAuth from './common/auth'
+import {
+  Routes,
+  Route,  
+  Outlet,
+} from "react-router-dom";
 
 function App() {
   return (
-    <div className="">
-      <div className="row">
-      <div className="col-lg-12 col-12 col-md-8">
-        <Header />
-      </div>
-      </div>
-      <div className="row">        
-        {/* <div className="col-lg-12 col-12 col-md-8"> */}
-          <div className="col-lg-2">
-            <Panel />
-          </div>
-          <div className="col-lg-8">
-            <Container />
-          </div>
-          <div className="col-lg-2">
-          
-          </div>
-
-        {/* </div> */}
-      </div>
-      <div className="row">
-      <div className="col-lg-12 col-12 col-md-8">
-        <Footer />
-      </div>
-      </div>
-    </div>
-    
-    
+  <AuthProvider>
+    <Routes>
+        <Route element={<LayoutComponent />} >
+          <Route path="/" element={<HomeComponent />} errorElement={<ErrorComponent />} />
+          <Route path="/login" element={<LoginComponent />} />               
+         <Route
+            path="/details"
+            element={
+              <RequireAuth>
+                <DetailsComponent />
+              </RequireAuth>
+            }
+          />
+        </Route>
+      </Routes>
+  </AuthProvider>
       
   );
 }
