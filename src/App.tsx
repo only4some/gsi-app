@@ -1,18 +1,18 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.scss';
-import Header from './common/header';
-import Footer from './common/footer';
-import Panel from './common/panel';
-import Container from './common/container';
-import LayoutComponent from './common/un-authenticated/layout-component';
+import HeaderComponent from './common/header-component';
+import FooterComponent from './common/footer-component';
+import PanelComponent from './common/panel-component';
+import ContainerComponent from './common/container-component';
+import UnAuthLayoutComponent from './common/un-authenticated/unauth-layout-component';
 import HomeComponent from './common/home-component';
-import LoginComponent from './modules/login/login';
+import LoginComponent from './modules/login/login-component';
 import DetailsComponent from './modules/details-component';
 
 import ErrorComponent from './common/error-component';
 import AuthProvider from './common/auth'
-import RequireAuth from './common/require-auth-component'
+import RequireAuthComponent from './common/require-auth-component'
 import {
   Routes,
   Route,  
@@ -23,15 +23,15 @@ function App() {
   return (
   <AuthProvider>
     <Routes>
-        <Route element={<LayoutComponent />} >
+        <Route element={<UnAuthLayoutComponent />} >
           <Route path="/" element={<HomeComponent />} errorElement={<ErrorComponent />} />
           <Route path="/login" element={<LoginComponent />} />               
          <Route
             path="/details"
             element={
-              <RequireAuth>
+              <RequireAuthComponent>
                 <DetailsComponent />
-              </RequireAuth>
+              </RequireAuthComponent>
             }
           />
         </Route>

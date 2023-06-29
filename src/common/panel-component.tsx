@@ -1,6 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
-class Panel extends React.Component {
+class PanelComponent extends React.Component {
     constructor(props:any) {
         super(props);        
       }
@@ -31,4 +31,4 @@ class Panel extends React.Component {
 }
 
 }
-export default Panel;
+export default PanelComponent;

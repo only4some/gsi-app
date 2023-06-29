@@ -7,7 +7,7 @@ import {
 import {AuthContext} from './auth-context'
 
 
-export default function RequireAuth({ children }: { children: JSX.Element }) {
+export default function RequireAuthComponent({ children }: { children: JSX.Element }) {
  console.log('inside requireauth..');
   let auth = useAuth();
   let location = useLocation();

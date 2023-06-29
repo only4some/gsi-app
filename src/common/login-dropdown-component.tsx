@@ -1,6 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
-class LoginDropdown extends React.Component {
+class LoginDropdownComponent extends React.Component {
     constructor(props:any) {
         super(props);        
       }    
@@ -28,4 +28,4 @@ class LoginDropdown extends React.Component {
 }
 
 }
-export default LoginDropdown;
+export default LoginDropdownComponent;

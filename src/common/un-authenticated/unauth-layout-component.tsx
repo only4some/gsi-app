@@ -1,26 +1,30 @@
 import React from 'react';
 import logo from './logo.svg';
 import '../../App.scss';
-import Header from '../header';
-import Footer from '../footer';
-import Panel from '../panel';
-import Container from '../container';
+import UnAuthHeaderComponent from './unauth-header-component';
+import UnAuthFooterComponent from './unauth-footer-component';
 import {  
   Outlet
 } from "react-router-dom";
 
-function LayoutComponent() {
+class UnAuthLayoutComponent extends React.Component{
+
+constructor(props:any) {
+        super(props);           
+      }
+
+render(){
   return (
     <div className="">
       <div className="row">
       <div className="col-lg-12 col-12 col-md-8">
-        <Header />
+        <UnAuthHeaderComponent />
       </div>
       </div>
       <div className="row">        
         {/* <div className="col-lg-12 col-12 col-md-8"> */}
           <div className="col-lg-2">
-            <Panel />
+            
           </div>
           <div className="col-lg-8">
              <Outlet />
@@ -33,7 +37,7 @@ function LayoutComponent() {
       </div>
       <div className="row">
       <div className="col-lg-12 col-12 col-md-8">
-        <Footer />
+        <UnAuthFooterComponent />
       </div>
       </div>
     </div>
@@ -42,5 +46,6 @@ function LayoutComponent() {
       
   );
 }
+}
 
-export default LayoutComponent;
+export default UnAuthLayoutComponent;

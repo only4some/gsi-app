@@ -1,5 +1,9 @@
 import React from 'react';
-function Container(){
+class ContainerComponent extends React.Component{
+constructor(props:any) {
+        super(props);        
+      }    
+    render(){
     return (
         <div className="container">
             <div className="tab-content" id="v-pills-tabContent">
@@ -9,6 +13,7 @@ function Container(){
             <div className="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
             </div>
         </div>
-    );
+        );
+    }
 }
-export default Container;
+export default ContainerComponent;

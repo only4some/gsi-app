@@ -1,5 +1,5 @@
 import React from 'react';
-function Footer(){
+function FooterComponent(){
     return (
         <div className="footer">
         <h3>Hi im footer</h3>
@@ -7,4 +7,4 @@ function Footer(){
     );
 
 }
-export default Footer;
+export default FooterComponent;

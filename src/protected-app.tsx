@@ -1,26 +1,26 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.scss';
-import Header from './common/header';
-import Footer from './common/footer';
-import Panel from './common/panel';
-import Container from './common/container';
+import HeaderComponent from './common/header-component';
+import FooterComponent from './common/footer-component';
+import PanelComponent from './common/panel-component';
+import ContainerComponent from './common/container-component';
 
 function ProtectedApp() {
   return (
     <div className="">
       <div className="row">
       <div className="col-lg-12 col-12 col-md-8">
-        <Header />
+        <HeaderComponent />
       </div>
       </div>
       <div className="row">        
         {/* <div className="col-lg-12 col-12 col-md-8"> */}
           <div className="col-lg-2">
-            <Panel />
+            <PanelComponent />
           </div>
           <div className="col-lg-8">
-            <Container />
+            <ContainerComponent />
           </div>
           <div className="col-lg-2">
           
@@ -30,7 +30,7 @@ function ProtectedApp() {
       </div>
       <div className="row">
       <div className="col-lg-12 col-12 col-md-8">
-        <Footer />
+        <FooterComponent />
       </div>
       </div>
     </div>

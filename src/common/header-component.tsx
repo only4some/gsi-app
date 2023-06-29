@@ -1,12 +1,12 @@
 import React from 'react';
 import logo from '../logo.svg';
-import LoginDropdown from './login-dropdown';
-function Header(){
+import LoginDropdownComponent from './login-dropdown-component';
+function HeaderComponent(){
     return (
         <div className="header row">
-        <div className="col-lg-4">
+        <div className="col-lg-5">
         </div>
-        <div className="col-lg-6">
+        <div className="col-lg-5">
         <div className="d-flex flex-row">
                 <div className="neg-m-l-20"><img className="main-logo" src={logo} /></div>
                 <div className="d-flex flex-column align-items-start pt-2">
@@ -16,10 +16,10 @@ function Header(){
             </div>
         </div>
         <div className="col-lg-2">
-            <LoginDropdown />
+            <LoginDropdownComponent />
         </div>
         </div>
     );
 
 }
-export default Header;
+export default HeaderComponent;

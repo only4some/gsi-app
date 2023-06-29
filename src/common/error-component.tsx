@@ -1,12 +1,12 @@
+import React from 'react';
 import { useRouteError,isRouteErrorResponse } from "react-router-dom";
 
-export default function ErrorComponent() {
-   const error = useRouteError() as Error;
+export default function ErrorComponent(){
+  const error = useRouteError() as Error;
 
-    if (!isRouteErrorResponse(error)) {
-        return null;
-    }
-
+     if (!isRouteErrorResponse(error)) {
+          return null;
+        }
 
   return (
     <div id="error-page">
@@ -17,4 +17,5 @@ export default function ErrorComponent() {
       </p>
     </div>
   );
-}
+  }
+
