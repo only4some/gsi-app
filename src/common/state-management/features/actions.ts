@@ -8,7 +8,10 @@ function makeActionCreator(type, ...argNames) {
   }
 }
 export const HAS_LOGGED_IN = "user/HAS_LOGGED_IN";
-const HAS_LOGGED_OUT = "HAS_LOGGED_OUT";
+export const USER_LOGIN_SUCCEEDED="user/USER_LOGIN_SUCCEEDED"
+export const SAGA_USER_LOGIN_CHECK="USER_LOGIN_CHECK"
+
 
 export const hasLoggedIn = makeActionCreator(HAS_LOGGED_IN,'details');
-export const hasLoggedOut = makeActionCreator(HAS_LOGGED_OUT,'details');
+export const userLoginSucceeded = makeActionCreator(USER_LOGIN_SUCCEEDED,'details');
+export const sagaUserLoginCheck = makeActionCreator(SAGA_USER_LOGIN_CHECK,'details');

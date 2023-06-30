@@ -1,4 +1,5 @@
 @import "~bootstrap/scss/bootstrap.scss";
+@import "../custom-var.scss";
 
 .panel{
     height: 500px;
@@ -54,9 +55,33 @@
 
 form{
    margin-bottom: 15px;
-  background: #f7f7f7;
+  background: $gsi-form-gray; /*#f7f7f7;*/
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
   padding: 30px;
   }
 
+}
+
+.load-spinner {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.load-spinner-sm{
+  border: 5px solid $gsi-light-blue;
+  ebkit-animation: spin 1s linear infinite;
+animation: spin 1s linear infinite;
+border-top: 5px solid $gsi-primary-blue;
+border-radius: 50%;
+width: 40px;
+height: 40px;
 }

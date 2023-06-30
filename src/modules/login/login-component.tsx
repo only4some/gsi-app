@@ -1,7 +1,7 @@
 import React,{useCallback} from 'react';
 import $ from 'jquery';
 import { useAppSelector,useAppDispatch } from '../../common/state-management/hooks'
-import {hasLoggedIn} from '../../common/state-management/features/actions'
+import {hasLoggedIn,sagaUserLoginCheck} from '../../common/state-management/features/actions'
 
 
  export default function Login(){
@@ -9,10 +9,11 @@ import {hasLoggedIn} from '../../common/state-management/features/actions'
         const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn)
         console.log('isLoggedIn',isLoggedIn);
         const dispatch = useAppDispatch()
+        const loaderHtml = <div className="load-spinner-sm ml-2"></div> 
 
         const handleClick = useCallback(
              () => {
-             dispatch(hasLoggedIn("test"))             
+             dispatch(sagaUserLoginCheck("test"))             
              console.log('clicked called...');
              },
             [dispatch]
@@ -22,7 +23,10 @@ import {hasLoggedIn} from '../../common/state-management/features/actions'
         
 <div className="login-form">
     <form >
-        <h2 className="text-center">Log in-{isLoggedIn.toString()}</h2>       
+        <div className="d-flex flex-row justify-content-center">
+            <h2 className="text-center">Log in-{isLoggedIn.toString()}</h2> 
+            {loaderHtml}
+         </div>
         <div className="form-group">
             <input type="text" className="form-control" placeholder="Username" required  />
         </div>
