@@ -8,12 +8,16 @@ import {hasLoggedIn,sagaUserLoginCheck} from '../../common/state-management/feat
         
         const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn)
         console.log('isLoggedIn',isLoggedIn);
-        const dispatch = useAppDispatch()
-        const loaderHtml = <div className="load-spinner-sm ml-2"></div> 
+        const dispatch = useAppDispatch()        
+        let showLoader = useAppSelector((state) => state.user.isLoading)
+        let error = useAppSelector((state) => state.user.error)
+        console.log('error',error)        
+        const loaderHtml = showLoader?<div className="load-spinner-sm ml-2"></div>:<div></div>
 
         const handleClick = useCallback(
              () => {
              dispatch(sagaUserLoginCheck("test"))             
+             showLoader = true
              console.log('clicked called...');
              },
             [dispatch]
@@ -34,7 +38,7 @@ import {hasLoggedIn,sagaUserLoginCheck} from '../../common/state-management/feat
             <input type="password" className="form-control" placeholder="Password" required />
         </div>
         <div className="form-group">
-            <button type="button" onClick={handleClick} className="btn btn-primary btn-block">Log in</button>
+            <button type="button" onClick={handleClick} className="btn btn-primary btn-block" disabled={showLoader}>Log in</button>
         </div>
         <div className="clearfix">
             <label className="float-left form-check-label"><input type="checkbox" /> Remember me</label>
