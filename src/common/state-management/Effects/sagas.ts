@@ -1,7 +1,7 @@
 import { call, put, takeEvery, takeLatest,take } from 'redux-saga/effects'
-import {userLoginSucceeded,userApiCallStarted,userLoginFailled,sagaUserLoginFailled} from '../features/actions'
+import {userLoginSucceeded,userApiCallStarted,userLoginFailled} from '../features/actions'
 import {checkLogin} from '../../services/user-api'
-
+import {ErrorDetails} from '../../models/api-response'
 
 
 function* checkUserLogin(emailStr,passwdStr) {
@@ -11,10 +11,13 @@ function* checkUserLogin(emailStr,passwdStr) {
   	yield put(userApiCallStarted())
   	const apiCall = yield call(checkLogin,{email:emailStr,password:passwdStr})
   	console.log('apiResult inside saga',apiCall);
-  	if(!!apiCall?.payload?.error){
-  		console.log('error recieved..',sagaUserLoginFailled("ss"));
-  		yield put(userLoginFailled({code:apiCall?.payload?.error.code,message:apiCall?.payload?.error.message}));
-  		yield put(sagaUserLoginFailled("ss"));
+  	if(!!apiCall?.payload?.error){  		
+  		const errorDetails:ErrorDetails={
+  			code:apiCall?.payload?.error.code,
+  			message:apiCall?.payload?.error.message
+  		}
+  		console.log('sending  error details from saga..',errorDetails)
+  		yield put(userLoginFailled(errorDetails));  		
   	}else{
   		console.log('user login success ..');
   		isSuccess = true;
@@ -31,8 +34,8 @@ function* checkUserLogin(emailStr,passwdStr) {
 function* gsiSaga() {
   //yield takeEvery('USER_LOGIN_CHECK', checkUserLogin)
    while (true) {
-   	yield take('USER_LOGIN_CHECK')
-   	const res = yield call(checkUserLogin,"test","pest")
+   	const actionData = yield take('USER_LOGIN_CHECK')   	
+   	const res = yield call(checkUserLogin,actionData?.details?.email,actionData?.details?.password)
    	console.log('next line ')
    	if(res){
    		yield take('LOGOUT')

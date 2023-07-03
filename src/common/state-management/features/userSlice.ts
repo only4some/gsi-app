@@ -1,4 +1,5 @@
 import {createSlice,PayloadAction} from '@reduxjs/toolkit'
+import {ErrorDetails} from '../../models/api-response'
 
 
 export interface UserState {
@@ -6,8 +7,8 @@ export interface UserState {
 		details:any,
 		isLoading:boolean,
 		error?:{
-			code:string,
-			message:string
+			code?:string,
+			message?:string
 		}
 }
 
@@ -25,6 +26,7 @@ export const initialState:UserState = {
 		USER_API_CALL_STARTED: (state,action: PayloadAction<number>)=> {
 			console.log('USER_API_CALL_STARTED  received ..',action)
 			state.isLoading = true			
+			state.error = {}
 		},
 		HAS_LOGGED_IN: (state,action: PayloadAction<number>)=> {
 			console.log('has logged in received ..',action)
@@ -35,11 +37,11 @@ export const initialState:UserState = {
 			state.isLoggedIn = true
 			state.isLoading = false			
 		},
-		USER_LOGIN_FAILED: (state,action:any)=> {
+		USER_LOGIN_FAILED: (state,action:PayloadAction<ErrorDetails>)=> {
 			console.log('user login failled ..',action)
 			state.isLoggedIn = false
 			state.isLoading = false
-			state.error={code:action.error.code,message:action.error.message}
+			state.error={code:action.payload?.code,message:action.payload?.message}
 		}		
 	}
 });

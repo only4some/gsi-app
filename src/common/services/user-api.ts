@@ -11,7 +11,7 @@ const instance = axios.create({
 });
 
 
-export function* checkLogin(request:UserRequest){
+export function* checkLogin(request:UserRequest) {
 	
 	
 			const res= yield axios.post('/login/', {
