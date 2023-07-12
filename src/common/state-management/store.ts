@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import { combineReducers } from 'redux'
 import user from './features/userSlice'
 import createSagaMiddleware from 'redux-saga'
-import gsiSaga from './Effects/sagas'
+import rootGsiSaga from './Effects/sagas'
 
 const reducer = combineReducers({
   user
@@ -15,7 +15,7 @@ export const store = configureStore({
 	middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware),
 });
 
-sagaMiddleware.run(gsiSaga)
+sagaMiddleware.run(rootGsiSaga)
 
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch

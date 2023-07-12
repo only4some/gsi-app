@@ -11,7 +11,7 @@ export default function RequireAuthComponent({ children }: { children: JSX.Eleme
  console.log('inside requireauth..');
   let auth = useAuth();
   let location = useLocation();
-  console.log(' requireauth is..',auth);
+  console.log(' requireauth is..',auth);  
 
   if (!auth.user) {
   console.log('user is not auth..')

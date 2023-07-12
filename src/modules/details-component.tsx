@@ -1,14 +1,15 @@
-import React from 'react';
+import React,{useCallback,useState,useRef,useEffect} from 'react';
+import {sagaUserApiGetList} from '../common/state-management/features/actions'
+import { useAppSelector,useAppDispatch } from '../common/state-management/hooks'
 
-class DetailsComponent extends React.Component {
-    constructor(props:any) {
-        super(props);        
-      }    
+export default function DetailsComponent(){
+  const dispatch = useAppDispatch()        
 
-      componentDidMount() {      
-      }
-    render() {   
+   useEffect(() => {   
+            console.log('inside details..')
+              dispatch(sagaUserApiGetList());
 
+                }, []);
     return (
         
              <div className="d-flex d-flex-row">            
@@ -17,7 +18,6 @@ class DetailsComponent extends React.Component {
         
     );
 
-}
+
 
 }
-export default DetailsComponent;

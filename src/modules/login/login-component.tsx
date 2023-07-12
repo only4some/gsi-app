@@ -1,7 +1,9 @@
-import React,{useCallback} from 'react';
+import React,{useCallback,useState,useRef,useEffect} from 'react';
 import $ from 'jquery';
 import { useAppSelector,useAppDispatch } from '../../common/state-management/hooks'
 import {hasLoggedIn,sagaUserLoginCheck} from '../../common/state-management/features/actions'
+import {useNavigate} from 'react-router-dom'
+
 
  interface LoginInfo {
             email?:string,
@@ -9,32 +11,44 @@ import {hasLoggedIn,sagaUserLoginCheck} from '../../common/state-management/feat
         }
 
  export default function Login(){
+
+        const [userText, setUserText] = useState("");
+        const [passText, setPassText] = useState("");
+        //const isAlive = useRef(true)
+        const navigate = useNavigate()        
+        const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn)       
         
-        const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn)
+            useEffect(() => {   
+            console.log('redirecting to details..')
+            if(isLoggedIn){                
+                navigate('/details')
+            }
+             }, [isLoggedIn]);
+        
         console.log('isLoggedIn',isLoggedIn);
         const dispatch = useAppDispatch()        
         let errorHTML = getErrorHTML(useAppSelector((state) => state.user.error))  
         let showLoader = useAppSelector((state) => state.user.isLoading)      
-        const loaderHtml = getLoaderHTML(showLoader)
-        let loginInfo:LoginInfo={email:'',password:''}
+        const loaderHtml = getLoaderHTML(showLoader)        
 
         const handleClick = useCallback(
-             () => {
-             dispatch(sagaUserLoginCheck({email:loginInfo?.email,password:loginInfo?.password}));
-             console.log('clicked called...');
+             () => {    
+                dispatch(sagaUserLoginCheck({email:userText,password:passText}));
+             
              },
-            [dispatch]
+            [dispatch,userText,passText]
             )
 
         const onChangeTxt=(val,type)=>{
+            
             switch(type){
                 case "EMAIL":
-                loginInfo.email=val;
+                setUserText(val);
                 break;
                 case "PASSWORD":
-                loginInfo.password=val;
+                setPassText(val);
                 break;
-            }
+                }            
         }
        
     return (
@@ -52,7 +66,7 @@ import {hasLoggedIn,sagaUserLoginCheck} from '../../common/state-management/feat
             <input onChange={(event) => onChangeTxt(event.target.value,'EMAIL')}  type="text" className="form-control" placeholder="Username" required  />
         </div>
         <div className="form-group">
-            <input onChange={(event) => onChangeTxt(event.target.value,'PASSWORD')} type="password" className="form-control" placeholder="Password" required />
+            <input  onChange={(event) => onChangeTxt(event.target.value,'PASSWORD')} type="password" className="form-control" placeholder="Password" required />
         </div>
         <div className="form-group">
             <button type="button" onClick={handleClick} className="btn btn-primary btn-block" disabled={showLoader}>Log in</button>

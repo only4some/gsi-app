@@ -5,19 +5,62 @@ import {sagaUserApiCompleted} from '../state-management/features/actions'
 import { call, put } from 'redux-saga/effects'
 
 const instance = axios.create({
-  baseURL: 'http://127.0.0.1:8000/',
+  baseURL: 'http://localhost:8000/',
   timeout: 10000,
-  headers: {'X-Custom-Header': 'foobar'}
+  withCredentials: true
 });
 
 
 export function* checkLogin(request:UserRequest) {
 	
 	
-			const res= yield axios.post('/login/', {
+			const res= yield instance.post('/api/v1/auth/login/', {
 			    email: request.email,
-			    password: request.password
+			    password: request.password,
+			    crossDomain: true,
+
+			  },{withCredentials: true})
+			  .then(function (response) {
+			  	const resData:ResponseData ={
+			  	data:response?.data	
+			  	};
+
+			  	const resObj=new ApiResponse(resData);
+			  	
+			    console.log('response from api..',response);			    
+			    return resObj;
+			    
 			  })
+			  .catch(function (error) {			  	
+			  	let errors= error?.response?.data?.errors;
+			  	let errObj = {code:'',message:''}			  	
+			  	if(errors && errors?.length>0){
+			  		errObj.code = errors[0].status
+			  		errObj.message = errors[0].detail
+			  	}
+			  	else{
+			  		errObj.message = error?.code
+			  	}
+				  const resData:ResponseData ={
+			  		data:null,
+			  		error:{code:errObj.code,message:errObj.message}
+			  	};
+
+			  	const resObj=new ApiResponse(resData);
+			    console.log('api error--',error.code);
+			    return resObj;			    
+			  });
+
+	//}
+return res;
+
+}
+
+
+export function* getUserLists() {
+	
+	
+			const res= yield instance.get('/api/v1/site/')
 			  .then(function (response) {
 			  	const resData:ResponseData ={
 			  	data:response			  	
@@ -25,7 +68,7 @@ export function* checkLogin(request:UserRequest) {
 
 			  	const resObj=new ApiResponse(resData);
 			  	
-			    console.log('response from api..',response);			    
+			    console.log('get response from api..',response);			    
 			    return resObj;
 			    
 			  })
@@ -45,4 +88,5 @@ export function* checkLogin(request:UserRequest) {
 return res;
 
 }
+
 //  })
