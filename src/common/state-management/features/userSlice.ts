@@ -1,27 +1,10 @@
 import {createSlice,PayloadAction} from '@reduxjs/toolkit'
 import {ErrorDetails} from '../../models/api-response'
-
-
-export interface UserState {
-  		isLoggedIn:boolean,
-		details:any,
-		isLoading:boolean,
-		error?:{
-			code?:string,
-			message?:string
-		}
-}
-
-export const initialState:UserState = {
- 		isLoggedIn:false,
-		details:null,
-		isLoading:false
-		
-}
+import {rootInitialState} from './rootSlice'
 
 	const slice = createSlice({
 	name:'user',
-	initialState,
+	initialState:rootInitialState.user,
 	reducers: {		
 		USER_API_CALL_STARTED: (state,action: PayloadAction<number>)=> {
 			console.log('USER_API_CALL_STARTED  received ..',action)
@@ -35,7 +18,8 @@ export const initialState:UserState = {
 		USER_LOGIN_SUCCEEDED: (state,action: PayloadAction<number>)=> {
 			console.log('user login succ ..',action)
 			state.isLoggedIn = true
-			state.isLoading = false			
+			state.isLoading = false
+			state.details =	{name:"sandy",id:"asd2ss2s"}
 		},
 		USER_LOGIN_FAILED: (state,action:PayloadAction<ErrorDetails>)=> {
 			console.log('user login failled ..',action)

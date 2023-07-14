@@ -51,7 +51,7 @@ export function* checkLogin(request:UserRequest) {
 			    return resObj;			    
 			  });
 
-	//}
+	
 return res;
 
 }
@@ -84,9 +84,11 @@ export function* getUserLists() {
 			    
 			  });
 
-	//}
+
 return res;
 
 }
 
-//  })
+
+
+

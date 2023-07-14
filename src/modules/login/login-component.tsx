@@ -1,8 +1,10 @@
 import React,{useCallback,useState,useRef,useEffect} from 'react';
 import $ from 'jquery';
 import { useAppSelector,useAppDispatch } from '../../common/state-management/hooks'
-import {hasLoggedIn,sagaUserLoginCheck} from '../../common/state-management/features/actions'
+import {sagaUserLoginCheck} from '../../common/state-management/features/actions'
 import {useNavigate} from 'react-router-dom'
+
+
 
 
  interface LoginInfo {
@@ -16,7 +18,8 @@ import {useNavigate} from 'react-router-dom'
         const [passText, setPassText] = useState("");
         //const isAlive = useRef(true)
         const navigate = useNavigate()        
-        const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn)       
+        const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn)  
+
         
             useEffect(() => {   
             console.log('redirecting to details..')

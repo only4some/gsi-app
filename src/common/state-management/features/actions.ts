@@ -7,20 +7,31 @@ function makeActionCreator(type, ...argNames) {
     return action
   }
 }
-export const HAS_LOGGED_IN = "user/HAS_LOGGED_IN";
+
 export const USER_LOGIN_SUCCEEDED="user/USER_LOGIN_SUCCEEDED"
 export const USER_LOGIN_FAILED="user/USER_LOGIN_FAILED"
 export const USER_API_CALL_STARTED="user/USER_API_CALL_STARTED"
+export const CONFIG_API_CALL_STARTED="config/CONFIG_API_CALL_STARTED"
+export const CONFIG_API_CALL_SUCCESS="config/CONFIG_API_CALL_SUCCESS"
+export const CONFIG_API_CALL_FAILLED="config/CONFIG_API_CALL_FAILLED"
+
 export const SAGA_USER_LOGIN_CHECK="USER_LOGIN_CHECK"
 export const SAGA_USER_API_COMPLETED ="SAGA_USER_API_COMPLETED"
 export const SAGA_USER_GET_LIST ="SAGA_USER_GET_LIST"
+export const SAGA_CONFIG_GET_FEATURES ="SAGA_CONFIG_GET_FEATURES"
 
 
 
-export const hasLoggedIn = makeActionCreator(HAS_LOGGED_IN,'details');
+
+
 export const userLoginSucceeded = makeActionCreator(USER_LOGIN_SUCCEEDED,'details');
 export const userLoginFailled = makeActionCreator(USER_LOGIN_FAILED,'payload');
 export const userApiCallStarted = makeActionCreator(USER_API_CALL_STARTED,'details');
+export const configApiCallStarted = makeActionCreator(CONFIG_API_CALL_STARTED,'details');
+export const configApiCallSuccess = makeActionCreator(CONFIG_API_CALL_SUCCESS,'payload');
+export const configApiCallFailled = makeActionCreator(CONFIG_API_CALL_FAILLED,'payload');
+
 export const sagaUserLoginCheck = makeActionCreator(SAGA_USER_LOGIN_CHECK,'details');
 export const sagaUserApiCompleted = makeActionCreator(SAGA_USER_API_COMPLETED,'details');
 export const sagaUserApiGetList = makeActionCreator(SAGA_USER_GET_LIST,'details');
+export const sagaConfigApiGet = makeActionCreator(SAGA_CONFIG_GET_FEATURES,'details');

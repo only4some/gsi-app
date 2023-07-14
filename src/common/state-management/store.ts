@@ -1,12 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { combineReducers } from 'redux'
 import user from './features/userSlice'
+import config from './features/configSlice'
 import createSagaMiddleware from 'redux-saga'
 import rootGsiSaga from './Effects/sagas'
 
 const reducer = combineReducers({
-  user
-
+  user,
+  config
 })
 const sagaMiddleware = createSagaMiddleware()
 
