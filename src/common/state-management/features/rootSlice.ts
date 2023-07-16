@@ -2,8 +2,8 @@ import {createSlice,PayloadAction} from '@reduxjs/toolkit'
 import {ErrorDetails} from '../../models/api-response'
 
 export interface feature {
-	name:string,
-	isOtpRequired:boolean
+	feature_name:string,
+	is_otp_required:boolean
 }
 
 export interface configState{

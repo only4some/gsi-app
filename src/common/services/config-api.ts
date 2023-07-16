@@ -13,7 +13,7 @@ const instance = axios.create({
 export function* configApiGet() {
 	
 	
-			const res= yield instance.get('/api/v1/config/')
+			const res= yield instance.get('api/v1/public/user-config/')
 			  .then(function (response) {
 			  	const resData:ResponseData ={
 			  	data:response			  	
@@ -21,8 +21,8 @@ export function* configApiGet() {
 
 			  	const resObj=new ApiResponse(resData);
 			  	
-			    console.log('get response from config api..',response);
-			    return resObj;
+			    console.log('get response from config api..',response?.data?.data?.result);
+			    return response?.data?.data?.result;
 			    
 			  })
 			  .catch(function (error) {			  	

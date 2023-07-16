@@ -61,7 +61,7 @@ function* gsiConfigSaga() {
 
   
    while (true) {
-    try{
+    try{      
     const actionData = yield take('SAGA_CONFIG_GET_FEATURES')
      yield put(configApiCallStarted())
     const apiCall = yield call(configApiGet)    
@@ -76,7 +76,7 @@ function* gsiConfigSaga() {
     }else{
       console.log('get config success ..');
       isSuccess = true;
-      yield put(configApiCallSuccess({payload:apiCall?.payload?.data}));
+      yield put(configApiCallSuccess({payload:apiCall}));
     }
 
     console.log('saga3 completed.. ')
@@ -95,7 +95,9 @@ function* gsiConfigSaga() {
 export default function* rootGsiSaga() {
   yield all([
     gsiSaga(),
-    gsiDetailsSaga()
+    gsiConfigSaga(),
+    gsiDetailsSaga(),
+
   ])
   // code after all-effect
 }

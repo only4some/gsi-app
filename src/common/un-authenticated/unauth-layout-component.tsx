@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState,useMemo} from 'react';
 import logo from './logo.svg';
 import '../../App.scss';
 import UnAuthHeaderComponent from './unauth-header-component';
@@ -7,13 +7,10 @@ import {
   Outlet
 } from "react-router-dom";
 
-class UnAuthLayoutComponent extends React.Component{
+export default function UnAuthLayoutComponent(){
 
-constructor(props:any) {
-        super(props);           
-      }
+  
 
-render(){
   return (
     <div className="">
       <div className="row">
@@ -45,7 +42,7 @@ render(){
     
       
   );
-}
+
 }
 
-export default UnAuthLayoutComponent;
+
