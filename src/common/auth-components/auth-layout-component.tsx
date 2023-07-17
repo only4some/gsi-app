@@ -1,26 +1,30 @@
-import React from 'react';
+import React,{useState,useMemo} from 'react';
 import logo from './logo.svg';
-import './App.scss';
-import HeaderComponent from './common/header-component';
-import FooterComponent from './common/footer-component';
-import PanelComponent from './common/panel-component';
-import ContainerComponent from './common/container-component';
+import '../../App.scss';
+import AuthHeaderComponent from './auth-header-component';
+import AuthFooterComponent from './auth-footer-component';
+import {  
+  Outlet
+} from "react-router-dom";
 
-function ProtectedApp() {
+export default function AuthLayoutComponent(){
+
+  
+
   return (
     <div className="">
       <div className="row">
       <div className="col-lg-12 col-12 col-md-8">
-        <HeaderComponent />
+        <AuthHeaderComponent />
       </div>
       </div>
       <div className="row">        
         {/* <div className="col-lg-12 col-12 col-md-8"> */}
           <div className="col-lg-2">
-            <PanelComponent />
+            
           </div>
           <div className="col-lg-8">
-            <ContainerComponent />
+             <Outlet />
           </div>
           <div className="col-lg-2">
           
@@ -30,7 +34,7 @@ function ProtectedApp() {
       </div>
       <div className="row">
       <div className="col-lg-12 col-12 col-md-8">
-        <FooterComponent />
+        <AuthFooterComponent />
       </div>
       </div>
     </div>
@@ -38,6 +42,7 @@ function ProtectedApp() {
     
       
   );
+
 }
 
-export default ProtectedApp;
+

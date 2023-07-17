@@ -1,14 +1,14 @@
 import React,{useMemo} from 'react';
 import logo from './logo.svg';
 import './App.scss';
-import HeaderComponent from './common/header-component';
-import FooterComponent from './common/footer-component';
 import PanelComponent from './common/panel-component';
 import ContainerComponent from './common/container-component';
 import UnAuthLayoutComponent from './common/un-authenticated/unauth-layout-component';
 import HomeComponent from './common/home-component';
 import LoginComponent from './modules/login/login-component';
 import DetailsComponent from './modules/details-component';
+import OtpComponent from './modules/otp/otp-component';
+import AuthLayoutComponent from './common/auth-components/auth-layout-component';
 
 import ErrorComponent from './common/error-component';
 import AuthProvider from './common/auth'
@@ -20,10 +20,13 @@ import {
   Route,  
   Outlet,
 } from "react-router-dom";
+import {InfoContext} from './common/providers/info-context'
 
 function App() {
   const dispatch = useAppDispatch()
   const features = useAppSelector(state=>state.config?.features)
+  const profileContextVal={feature:"Profile"}
+  const otpContextVal={feature:"Otp"}
     useMemo(()=>{
       if(!features || features?.length <=0 ){
         console.log('trigerring config event..',sagaConfigApiGet())
@@ -40,15 +43,29 @@ function App() {
         <Route element={<UnAuthLayoutComponent />} >
           <Route path="/" element={<HomeComponent />} errorElement={<ErrorComponent />} />
           <Route path="/login" element={<LoginComponent />} />               
+        </Route>
+        <Route element={<AuthLayoutComponent />} >
          <Route
             path="/details"
             element={
+              <InfoContext.Provider value={profileContextVal}>
               <RequireAuthComponent>
                 <DetailsComponent />
               </RequireAuthComponent>
+              </InfoContext.Provider>
             }
-          />
-        </Route>
+          />        
+        <Route
+        path="/otp"
+        element={
+              <InfoContext.Provider value={otpContextVal}>
+              <RequireAuthComponent>
+                <OtpComponent />
+              </RequireAuthComponent>
+              </InfoContext.Provider>
+            }
+         />
+       </Route>
       </Routes>
   </AuthProvider>
       

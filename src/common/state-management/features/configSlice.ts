@@ -17,7 +17,9 @@ const slice=createSlice({
 			console.log('config api call success..');
 			state.isLoading=false;
 			state.error = {};
-			state.features= action.payload;
+			const payload:any = action.payload;
+			console.log('action.payload',payload?.payload)
+			state.features= payload?.payload;
 		},
 
 		CONFIG_API_CALL_FAILLED:(state,action:PayloadAction<ErrorDetails>)=>{
