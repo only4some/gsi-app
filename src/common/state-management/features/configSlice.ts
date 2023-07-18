@@ -9,12 +9,11 @@ const slice=createSlice({
 	initialState:rootInitialState.config,
 	reducers: {
 		CONFIG_API_CALL_STARTED:(state,action:PayloadAction<any>)=>{
-			console.log('config api call started..');
+			
 			state.isLoading=true;
 			state.error = {}
 		},
-		CONFIG_API_CALL_SUCCESS:(state,action:PayloadAction<feature[]>)=>{
-			console.log('config api call success..');
+		CONFIG_API_CALL_SUCCESS:(state,action:PayloadAction<feature[]>)=>{			
 			state.isLoading=false;
 			state.error = {};
 			const payload:any = action.payload;

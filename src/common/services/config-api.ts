@@ -21,7 +21,7 @@ export function* configApiGet() {
 
 			  	const resObj=new ApiResponse(resData);
 			  	
-			    console.log('get response from config api..',response?.data?.data?.result);
+			    //console.log('get response from config api..',response?.data?.data?.result);
 			    return response?.data?.data?.result;
 			    
 			  })

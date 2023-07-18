@@ -27,7 +27,7 @@ export function* checkLogin(request:UserRequest) {
 
 			  	const resObj=new ApiResponse(resData);
 			  	
-			    console.log('response from api..',response);			    
+			    //console.log('response from api..',response);			    
 			    return resObj;
 			    
 			  })
@@ -68,7 +68,7 @@ export function* getUserLists() {
 
 			  	const resObj=new ApiResponse(resData);
 			  	
-			    console.log('get response from api..',response);			    
+			    //console.log('get response from api..',response);			    
 			    return resObj;
 			    
 			  })

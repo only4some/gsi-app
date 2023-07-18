@@ -7,7 +7,7 @@ export default function DetailsComponent(){
 
    useEffect(() => {   
             console.log('inside details..')
-              dispatch(sagaUserApiGetList());
+              dispatch(sagaUserApiGetList({shouldShowOtp:true}));
 
                 }, []);
     return (

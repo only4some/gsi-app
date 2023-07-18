@@ -19,10 +19,10 @@ import {useNavigate} from 'react-router-dom'
         //const isAlive = useRef(true)
         const navigate = useNavigate()        
         const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn)  
+        const isOtpOpen = useAppSelector(state=>state.otp.isOpen);
 
         
-            useEffect(() => {   
-            console.log('redirecting to details..')
+            useEffect(() => {               
             if(isLoggedIn){                
                 navigate('/details')
             }
@@ -57,7 +57,8 @@ import {useNavigate} from 'react-router-dom'
     return (
         
 <div className="login-form">
-    <form >
+{!isOtpOpen?
+    <form>    
         <div className="d-flex flex-row justify-content-center">
             <h2 className="text-center">Log in</h2> 
             {loaderHtml}
@@ -65,6 +66,7 @@ import {useNavigate} from 'react-router-dom'
          <div className="d-flex flex-row">
          {errorHTML}
          </div>
+         
         <div className="form-group">
             <input onChange={(event) => onChangeTxt(event.target.value,'EMAIL')}  type="text" className="form-control" placeholder="Username" required  />
         </div>
@@ -77,8 +79,11 @@ import {useNavigate} from 'react-router-dom'
         <div className="clearfix">
             <label className="float-left form-check-label"><input type="checkbox" /> Remember me</label>
             <a href="#" className="float-right">Forgot Password?</a>
-        </div>        
+        </div>     
+          
+          
     </form>
+    :<div></div> }
     <p className="text-center"><a href="#">Create an Account</a></p>
 
 </div>

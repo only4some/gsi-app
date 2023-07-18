@@ -1,4 +1,4 @@
-import React,{useMemo} from 'react';
+import React from 'react';
 import logo from './logo.svg';
 import './App.scss';
 import PanelComponent from './common/panel-component';
@@ -13,8 +13,7 @@ import AuthLayoutComponent from './common/auth-components/auth-layout-component'
 import ErrorComponent from './common/error-component';
 import AuthProvider from './common/auth'
 import RequireAuthComponent from './common/require-auth-component'
-import { useAppSelector,useAppDispatch } from './common/state-management/hooks'
-import {sagaConfigApiGet} from './common/state-management/features/actions'
+
 import {
   Routes,
   Route,  
@@ -23,20 +22,9 @@ import {
 import {InfoContext} from './common/providers/info-context'
 
 function App() {
-  const dispatch = useAppDispatch()
-  const features = useAppSelector(state=>state.config?.features)
   const profileContextVal={feature:"Profile"}
   const otpContextVal={feature:"Otp"}
-    useMemo(()=>{
-      if(!features || features?.length <=0 ){
-        console.log('trigerring config event..',sagaConfigApiGet())
-        dispatch(sagaConfigApiGet())
-      }else{
-        console.log('inside use effect of parent app component..',features)
-      }
-      
-
-    },[features])
+   
   return (
   <AuthProvider>
     <Routes>

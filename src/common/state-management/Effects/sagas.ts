@@ -1,5 +1,5 @@
 import { call, put, takeEvery, takeLatest, take, all } from 'redux-saga/effects'
-import {userLoginSucceeded,userApiCallStarted,userLoginFailled,sagaUserApiGetList,configApiCallStarted,configApiCallSuccess,configApiCallFailled} from '../features/actions'
+import {userLoginSucceeded,userApiCallStarted,userLoginFailled,sagaUserApiGetList,configApiCallStarted,configApiCallSuccess,configApiCallFailled,otpShowModal} from '../features/actions'
 import {checkLogin,getUserLists} from '../../services/user-api'
 import {configApiGet} from '../../services/config-api'
 import {ErrorDetails} from '../../models/api-response'
@@ -8,11 +8,11 @@ import {ErrorDetails} from '../../models/api-response'
 function* checkUserLogin(emailStr,passwdStr) {
 	let isSuccess:boolean = false;
   try {    
-  	console.log('recieved saga..');
+  	
   	yield put(userApiCallStarted())
   	const apiCall = yield call(checkLogin,{email:emailStr,password:passwdStr})
 
-  	console.log('apiResult inside saga',apiCall);
+  	
   	if(!!apiCall?.payload?.error){  		
   		const errorDetails:ErrorDetails={
   			code:apiCall?.payload?.error.code,
@@ -26,7 +26,7 @@ function* checkUserLogin(emailStr,passwdStr) {
   		yield put(userLoginSucceeded({details:""}));
   	}
   
-    console.log('sent action to store.');
+    
   } catch (e:any) {
     yield put({ type: 'user/USER_LOGIN_FAILED', message: e.message })
   }
@@ -38,7 +38,7 @@ function* gsiSaga() {
    while (true) {
    	const actionData = yield take('USER_LOGIN_CHECK')   	
    	const res = yield call(checkUserLogin,actionData?.details?.email,actionData?.details?.password)
-   	console.log('next line ',res)
+   	
    	if(res){
    		yield take('LOGOUT')
    	}
@@ -49,9 +49,15 @@ function* gsiSaga() {
 
 function* gsiDetailsSaga() {  
    while (true) {
-   	const actionData = yield take('SAGA_USER_GET_LIST')   	
+   	const actionData = yield take('SAGA_USER_GET_LIST') 
+    console.log('actionData from details saga..',actionData?.details?.shouldShowOtp)  	
+    if(!!actionData?.details?.shouldShowOtp){
+    yield put(otpShowModal({action:'SAGA_USER_GET_LIST',data:actionData}))
+  }else{
    	const res = yield call(getUserLists)
-   	console.log('next line for get details..',res)
+    console.log('next line for get details..',res)
+   }
+   	
    	console.log('saga2 completed.. ')
    }
 }
@@ -64,14 +70,13 @@ function* gsiConfigSaga() {
     try{      
     const actionData = yield take('SAGA_CONFIG_GET_FEATURES')
      yield put(configApiCallStarted())
-    const apiCall = yield call(configApiGet)    
-      console.log('apiResult inside get config saga',apiCall);
+    const apiCall = yield call(configApiGet)          
     if(!!apiCall?.payload?.error){      
       const errorDetails:ErrorDetails={
         code:apiCall?.payload?.error.code,
         message:apiCall?.payload?.error.message
       }
-      console.log('sending config error details from saga..',errorDetails)      
+      
       yield put(configApiCallFailled(errorDetails));      
     }else{
       console.log('get config success ..');

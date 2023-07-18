@@ -25,9 +25,22 @@ export interface UserState {
 		}		
 }
 
+export interface otpState{
+	moduleName?:string,
+	isOpen?:boolean,
+	onCloseAction?:string,
+	actionPayload?:any,
+	isLoading?:boolean,
+	error?:{
+			code?:string,
+			message?:string
+		}	
+}
+
 export interface rootState{
 	config:configState,
-	user:UserState
+	user:UserState,
+	otp:otpState
 }
 
 
@@ -42,8 +55,16 @@ export const userInitialState:UserState = {
 		isLoading:false
 		
 }
+export const otpInitialState:otpState={
+	moduleName:'',
+	isOpen:false,
+	onCloseAction:'',
+	actionPayload:{},
+	isLoading:false
+}
 
 export const rootInitialState:rootState = {
 	config:configInitialState,
-	user:userInitialState
+	user:userInitialState,
+	otp:otpInitialState
 }
